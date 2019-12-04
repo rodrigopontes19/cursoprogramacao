@@ -1,0 +1,256 @@
+#include <iostream>
+#include <string>
+#include <tchar.h>
+#include <array>
+#include <iomanip>
+
+void FuncModelosPrecos(std::string *Ptr_sMODELOS, int TamanhoVetor, float* Ptr_fPRECOS);
+void FuncOpcoes(std::string* Ptr_sOPCIONAIS, int iOpcional);
+double FuncOpcoesPrecos(int iOpcaoModelo, int TamanhoVetor, float* Ptr_fPRECOS);
+void FuncOpcionais(int TamanhoVetorOpcionais, std::string *Ptr_sOPCIONAIS);
+int FuncContinuar(int iContinuar);
+
+int main() {
+
+	_tsetlocale(LC_ALL, _T("portuguese"));
+	//float f_TE{ 0.0f }, f_AC{ 0.0f }, f_DH{ 0.0f }, f_MC{ 0.0f }, f_MB{ 0.0f };
+	std::string sOPCIONAIS[]{ "Básico", "Trio_Elétrico", "Ar_Condicionado", "Direção_Hidráulica", "Completo" };
+	//std::string sHB20{ "HB20" }, sHBS{ "HB20s" }, sHBX{ "HB20x" }, sCRT{ "CRETA" }, sIX{ "IX35" }, sTCN{ "TUCSON" }, sELT{ "ELANTRA" }, sSTF{ "SANTA_FE" }, sAZR{ "AZERA" }, sHR{"HR"};
+	std::string sMODELOS[]{ "HB20", "HB20s", "HB20x","CRETA", "IX35", "TUCSON", "ELANTRA", "SANTA_FE", "AZERA", "HR" };
+	float fPRECOS[]{ 46490.00f, 55390.00f, 62990.00f, 80990.00f, 99990.00f, 137900.00f, 90414.90f, 196702.10f, 269900.00f, 81990.00f };
+	std::string* Ptr_sMODELOS{ &sMODELOS[0] };
+	float* Ptr_fPRECOS{ &fPRECOS[0] };
+	std::string* Ptr_sOPCIONAIS{ &sOPCIONAIS[0] };
+	int iOpcional{ 0 };
+	int iOpcaoVeiculoModelo{ 0 };
+	int iContinuar{ 0 };
+	int TamanhoVetorOpcionais{ std::size(sOPCIONAIS) };
+	int TamanhoVetor{ std::size(sMODELOS) };
+
+	do
+	{
+
+			std::cout << "******************** SISTEMA DE VENDAS DE AUTOMÓVEIS ********************\n";
+			std::cout << "**************************** HYUNDAI MOTORS *****************************\n\n";
+
+			std::cout << "__________________________ MODELOS DÍSPONÍVEIS __________________________\n\n";
+
+	
+					FuncModelosPrecos(Ptr_sMODELOS, TamanhoVetor, Ptr_fPRECOS);
+
+			std::cout << "Informe o número correspondente ao modelo do veículo: ";
+			std::cin >> iOpcaoVeiculoModelo;
+			std::cout << "\a" << "\n\nModelo selecionado: " << Ptr_sMODELOS[iOpcaoVeiculoModelo - 1];
+
+			std::cout << "\n\n_________________________ OPCIONAIS DISPONÍVEIS _________________________ \n\n";
+
+					FuncOpcionais(TamanhoVetorOpcionais, Ptr_sOPCIONAIS);
+
+			std::cout << "Informe o número correspondente ao opcional: ";
+			std::cin >> iOpcional;
+
+					FuncOpcoes(Ptr_sOPCIONAIS, iOpcaoVeiculoModelo);
+
+					FuncOpcoesPrecos(iOpcional, iOpcaoVeiculoModelo, Ptr_fPRECOS);
+
+					std::cout << "\n\nVocê gostaria de realizar uma nova consulta? 00 = Encerrar || 99 = Continuar:";
+					std::cin >> iContinuar;
+
+					FuncContinuar(iContinuar);
+
+					system("cls");
+
+	} while (iContinuar == 99);
+
+	
+	system("pause");
+	return 0;
+}
+
+void FuncModelosPrecos(std::string *Ptr_sMODELOS, int TamanhoVetor, float *Ptr_fPRECOS)
+{
+
+	for (int i = 0; i < TamanhoVetor; i++) 
+	{
+
+		if ((i % 2) == 0)
+		{
+
+			std::cout << "\t";
+
+		}
+		else
+		{
+
+			std::cout << "\t\t";
+
+		}
+
+			
+
+		std::cout << i + 1 << " - " << Ptr_sMODELOS[i] << " - " << "R$ " << std::fixed << std::setprecision(2) << Ptr_fPRECOS[i];
+
+
+		if ((i % 2) != 0)
+		{
+			std::cout << "\n\n";
+
+		}
+
+	}
+
+}
+
+void FuncOpcoes(std::string* Ptr_sOPCIONAIS, int iOpcional)
+{
+
+	switch (iOpcional)
+	{
+	case 0:
+		std::cout << "Você selecionou o modelo: " <<Ptr_sOPCIONAIS[0];
+		std::cout << "\n\n";
+		break;
+	case 1:
+		std::cout << "Você selecionou o modelo: " << Ptr_sOPCIONAIS[1];
+		std::cout << "\n\n";
+		break;
+	case 2:
+		std::cout << "Você selecionou o modelo: " << Ptr_sOPCIONAIS[2];
+		std::cout << "\n\n";
+		break;
+	case 3:
+		std::cout << "Você selecionou o modelo: " << Ptr_sOPCIONAIS[3];
+		std::cout << "\n\n";
+		break;
+	case 4:
+		std::cout << "Você selecionou o modelo: " << Ptr_sOPCIONAIS[4];
+		std::cout << "\n\n";
+		break;
+	
+	default:
+		std::cout << "OPÇÃO INVÁLIDA!!";
+		std::cout << "\n\n";
+		break;
+	}
+
+
+}
+
+double FuncOpcoesPrecos(int iOpcional, int iOpcaoVeiculoModelo, float* Ptr_fPRECOS)
+{
+	
+	double valorDeFabrica{ Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] };
+	double ValorIPI{ Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] * 0.08 };
+	double ValorTotalDeFabricaIPI{ Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] + Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] * 0.08 };
+	double ValorDeFabricaIPI2{ (Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] + Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] * 0.08) * 0.02 };
+	double ValorDeFabrica2{ Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] * 0.02 };
+	double ValorTotalDeFabricaIPI2{ ValorTotalDeFabricaIPI + ((Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] + Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] * 0.08) * 0.02) };
+	double valorTotalDeFabrica2{ ValorTotalDeFabricaIPI + Ptr_fPRECOS[iOpcaoVeiculoModelo - 1] * 0.02 };
+	double ValorCompleto{ ValorTotalDeFabricaIPI + ValorDeFabricaIPI2 + (ValorDeFabrica2 * 2) + ((ValorTotalDeFabricaIPI + ValorDeFabricaIPI2 + (ValorDeFabrica2 * 2)) * 0.035) };
+
+
+	switch (iOpcional)
+	{
+	case 0:
+		std::cout << "\nO valor do Veículo Básico é: R$ " << std::fixed << std::setprecision(2) << valorDeFabrica << " + 8% de IPI: " << std::fixed << std::setprecision(2) << ValorIPI << "\n\n";
+		std::cout << "Total: R$ " << std::fixed << std::setprecision(2) << ValorTotalDeFabricaIPI;
+		std::cout << "\n\n";
+		break;
+	case 1:
+		std::cout << "\nO valor do Veículo com Trio Elétrico é: R$ " << std::fixed << std::setprecision(2) << valorDeFabrica << " + 2% do valor de fábrica: " << std::fixed << std::setprecision(2) << ValorDeFabrica2 << " + 8% de IPI: " << std::fixed << std::setprecision(2) << ValorIPI << "\n\n";
+		std::cout << "Total: R$ " << std::fixed << std::setprecision(2) << ValorTotalDeFabricaIPI2;
+		std::cout << "\n\n";
+		break;
+	case 2:
+		std::cout << "\nO valor do Veículo com Ar Condicionado é: R$ " << std::fixed << std::setprecision(2) << valorDeFabrica << " + 2% do valor de fábrica: " << std::fixed << std::setprecision(2) << ValorDeFabrica2 << " sem IPI." << "\n\n";
+		std::cout << "Total: R$ " << std::fixed << std::setprecision(2) << valorTotalDeFabrica2;
+		std::cout << "\n\n";
+		break;
+	case 3:
+		std::cout << "\nO valor do Veículo com Direção Hidráulica é: R$ " << std::fixed << std::setprecision(2) << valorDeFabrica << " + 2% do valor de fábrica: " << std::fixed << std::setprecision(2) << ValorDeFabrica2 << " sem IPI." << "\n\n";
+		std::cout << "Total: R$ " << std::fixed << std::setprecision(2) << valorTotalDeFabrica2;
+		std::cout << "\n\n";
+		break;
+	case 4:
+		std::cout << "\nO valor do Veículo Completo é: R$ " << std::fixed << std::setprecision(2) << valorDeFabrica << " + 2% do valor de fábrica: " << std::fixed << std::setprecision(2) << ValorDeFabrica2 << " com IPI: R$ " << std::fixed << std::setprecision(2) << ValorIPI << " , acrescido do valor de todos os opicionais + promoção adicional de 3.5%." <<"\n\n";
+		std::cout << "Total: R$ " << std::fixed << std::setprecision(2) << ValorCompleto;
+		std::cout << "\n\n";
+		break;
+
+	default:
+		std::cout << "\nOPÇÃO INVÁLIDA!" << "\n\n";
+		std::cout << "\n\n";
+		break;
+	}
+	
+	return 0;
+}
+
+void FuncOpcionais(int TamanhoVetorOpcionais, std::string* Ptr_sOPCIONAIS)
+{
+
+	for (int i = 0; i < TamanhoVetorOpcionais; i++)
+	{
+		
+		if ((i % 2) == 0)
+		{
+
+			std::cout << "\t";
+
+		}
+		else
+		{
+
+			std::cout << "\t\t";
+
+		}
+
+		std::cout << i << "-" << Ptr_sOPCIONAIS[i];
+
+
+		if ((i % 2) != 0)
+		{
+			std::cout << "\n\n";
+
+		}
+
+	}
+
+	std::cout << "\n\n";
+}
+
+int FuncContinuar(int iContinuar)
+{
+
+
+	if (iContinuar == 99 || iContinuar == 00)
+	{
+
+
+
+		switch (iContinuar)
+		{
+
+		case 00:
+
+			return iContinuar == 00;
+
+			break;
+
+		case 99:
+
+			return iContinuar == 99;
+
+			break;
+		}
+	}
+	else
+	{
+
+		return 0;
+
+	}
+
+	return 0;
+
+}

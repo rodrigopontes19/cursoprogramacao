@@ -1,0 +1,33 @@
+public class data {
+
+    int dia;
+    int mes;
+    int ano;
+   
+}
+
+
+import java.util.Scanner;
+
+public class dataTeste {
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+        
+        data data = new data();
+
+        System.out.println("Digite o dia:");
+        data.dia = scanner.nextInt();
+        System.out.println("Digite o mês:");
+        data.mes = scanner.nextInt();
+        System.out.println("Digite o ano:");
+        data.ano = scanner.nextInt();
+
+        System.out.printf("\n%d/%d/%d", data.dia, data.mes, data.ano);
+
+        scanner.close();
+
+    }
+
+    
+}

@@ -1,49 +1,28 @@
 public class ExercicioNumeroPrimo {
     public static void main(String[] args){
 
-        int numero = 35;
-				
-		
-						
-			
-			if(numero < 2){
+        int numero = 10;
+        int contador = 0;
 
-                System.out.printf("%d não é primo\n", numero);
+            for(int i = 1; i <= numero; i++){
 
-            }else if(numero == 2){
+                if(numero % i == 0){
 
-                System.out.printf("%d é primo\n", numero);
+                    contador++;
 
-            }else if(numero > 2 && numero % 2 == 0){
-
-                System.out.printf("%d não é primo\n", numero);
-
-            }else if(numero > 2 && numero % 2 != 0){
-
-                
-
-                    for(int resto = numero; resto > 0; resto--){
-                        
-                        int indice = numero;
-
-                        if(indice > 1 && indice < numero && numero % indice == 0){
-
-                            System.out.printf("%d não é primo\n", resto);
-
-                        }
-
-                        if(indice > 0 && indice == 1 || resto % numero == 0){
-
-                            System.out.printf("%d é primo\n", resto);
-                            
-                        }
-
-                        indice--;
-
-                    }
+                }
 
             }
-		
+
+                    if(contador > 2){
+
+                        System.out.printf("%d não é primo, pois ele tem %d múltiplos", numero, contador);
+
+                    }else{
+
+                        System.out.printf("%d é primo, pois tem apenas %d múltiplos", numero, contador);
+
+                    }
 
 
     }

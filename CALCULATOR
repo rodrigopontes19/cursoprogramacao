@@ -1,0 +1,98 @@
+import java.util.Scanner;
+
+class calculadora{
+
+    double a, b, result, retornoCalc;
+    char opcao;
+    double resp;
+
+
+    double CalcExec(double a, double b, char opcao){
+
+        double resp = 0000;
+        
+        switch (opcao){
+
+            case '+': resp = a + b;
+            break;
+
+            case '-': resp = a - b;
+            break;
+
+            case '*': resp = a * b;
+            break;
+
+            case '/': resp = a / b;
+            break;
+
+            default: resp = 0000;
+            break;
+
+        }
+        
+        return resp;
+        
+    }
+
+}
+
+class OpcaoCalc extends calculadora{
+
+    void funcOpcaoCalc(char opcao, double resp, double a, double b){
+
+        switch (opcao){
+
+            case '+': System.out.printf("A soma é: %.2f %c %.2f = %.2f", a, opcao, b, resp);
+            break;
+
+            case '-': System.out.printf("A subtração é: %.2f %c %.2f = %.2f", a, opcao, b, resp);
+            break;
+
+            case '*': System.out.printf("O produto é: %.2f %c %.2f = %.2f", a, opcao, b, resp);
+            break;
+
+            case '/': System.out.printf("A divisão é: %.2f %c %.2f = %.2f", a, opcao, b, resp);
+            break;
+
+            default: System.out.println("Opção inválida");
+            break;
+
+        }
+
+    }
+
+}
+
+class calculatorPrincipal{
+
+    public static void main(String[] args) {
+        calculadora ObjCalculadora = new calculadora();
+        OpcaoCalc objOpcaoCalc = new OpcaoCalc();
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("#### CALCULADORA ####\n");
+        System.out.println("#   7   8    9   #\n");
+        System.out.println("#   4   5    6   #\n");
+        System.out.println("#   1   2    3   #\n");
+        System.out.println("#####################\n");
+        System.out.println("###### OPÇÕES ######\n");
+        System.out.println("##| + | - | * | / |##\n\n");
+
+        System.out.println("Digite o primeiro número: ");
+        ObjCalculadora.a = scan.nextDouble();
+        System.out.println("Digite o segundo número: ");
+        ObjCalculadora.b = scan.nextDouble();
+        System.out.println("Digite a opção do cálculo que deseja realizar: ");
+        ObjCalculadora.opcao = scan.next().charAt(0);
+             
+
+
+       ObjCalculadora.resp = ObjCalculadora.CalcExec(ObjCalculadora.a, ObjCalculadora.b, ObjCalculadora.opcao);
+       objOpcaoCalc.funcOpcaoCalc(ObjCalculadora.opcao, ObjCalculadora.resp, ObjCalculadora.a, ObjCalculadora.b);
+        
+        
+        scan.close();
+        
+    }
+
+}
